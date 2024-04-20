@@ -311,7 +311,7 @@ checksum = "9ea835d29036a4087793836fa931b08837ad5e957da9e23886b29586fb9b6650"
 name = "emulator"
 version = "0.9.41"
 dependencies = [
- "plato-core",
+ "zeno-core",
  "sdl2",
 ]
 
@@ -349,7 +349,7 @@ dependencies = [
 name = "fetcher"
 version = "0.9.41"
 dependencies = [
- "plato-core",
+ "zeno-core",
  "reqwest",
  "signal-hook",
 ]
@@ -635,7 +635,7 @@ name = "importer"
 version = "0.9.41"
 dependencies = [
  "getopts",
- "plato-core",
+ "zeno-core",
 ]
 
 [[package]]
@@ -870,14 +870,14 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d231b230927b5e4ad203db57bbcbee2802f6bce620b1e4a9024a07d94e2907ec"
 
 [[package]]
-name = "plato"
+name = "zeno"
 version = "0.9.41"
 dependencies = [
- "plato-core",
+ "zeno-core",
 ]
 
 [[package]]
-name = "plato-core"
+name = "zeno-core"
 version = "0.9.41"
 dependencies = [
  "anyhow",

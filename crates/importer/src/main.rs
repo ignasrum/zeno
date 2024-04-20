@@ -1,13 +1,13 @@
 use std::env;
 use std::path::Path;
 use getopts::Options;
-use plato_core::chrono::NaiveDateTime;
-use plato_core::anyhow::{Error, Context, format_err};
-use plato_core::helpers::datetime_format;
-use plato_core::library::Library;
-use plato_core::settings::{LibraryMode, ImportSettings};
-use plato_core::metadata::{extract_metadata_from_document, extract_metadata_from_filename};
-use plato_core::metadata::{consolidate, rename_from_info};
+use zeno_core::chrono::NaiveDateTime;
+use zeno_core::anyhow::{Error, Context, format_err};
+use zeno_core::helpers::datetime_format;
+use zeno_core::library::Library;
+use zeno_core::settings::{LibraryMode, ImportSettings};
+use zeno_core::metadata::{extract_metadata_from_document, extract_metadata_from_filename};
+use zeno_core::metadata::{consolidate, rename_from_info};
 
 fn main() -> Result<(), Error> {
     let args: Vec<String> = env::args().skip(1).collect();
@@ -29,7 +29,7 @@ fn main() -> Result<(), Error> {
     let matches = opts.parse(&args).context("failed to parse the command line arguments")?;
 
     if matches.opt_present("h") {
-        println!("{}", opts.usage("Usage: plato-import -h|-I|-C|-EFSN [-k ALLOWED_KINDS] [-e METADATA_KINDS] [-a ADDED_DATETIME] [-m LIBRARY_MODE] LIBRARY_PATH"));
+        println!("{}", opts.usage("Usage: zeno-import -h|-I|-C|-EFSN [-k ALLOWED_KINDS] [-e METADATA_KINDS] [-a ADDED_DATETIME] [-m LIBRARY_MODE] LIBRARY_PATH"));
         return Ok(());
     }
 

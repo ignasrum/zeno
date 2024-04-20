@@ -704,7 +704,7 @@ impl Engine {
                     _ => {},
                 }
 
-                if let Some(mut v) = props.get("-plato-insert-before")
+                if let Some(mut v) = props.get("-zeno-insert-before")
                                           .map(|value| parse_inline_material(value, style.font_size, self.font_size, self.dpi)) {
                     inlines.append(&mut v);
                 }
@@ -713,7 +713,7 @@ impl Engine {
                     self.gather_inline_material(child, stylesheet, &style, spine_dir, markers, inlines);
                 }
 
-                if let Some(mut v) = props.get("-plato-insert-after")
+                if let Some(mut v) = props.get("-zeno-insert-after")
                                           .map(|value| parse_inline_material(value, style.font_size, self.font_size, self.dpi)) {
                     inlines.append(&mut v);
                 }

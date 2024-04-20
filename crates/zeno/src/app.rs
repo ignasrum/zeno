@@ -6,42 +6,42 @@ use std::path::Path;
 use std::sync::mpsc::{self, Receiver, Sender};
 use std::collections::VecDeque;
 use std::time::{Duration, Instant};
-use plato_core::anyhow::{Error, Context as ResultExt, format_err};
-use plato_core::chrono::Local;
-use plato_core::framebuffer::{Framebuffer, KoboFramebuffer1, KoboFramebuffer2, UpdateMode};
-use plato_core::view::{View, Event, EntryId, EntryKind, ViewId, AppCmd, RenderData, RenderQueue, UpdateData};
-use plato_core::view::{handle_event, process_render_queue, wait_for_all};
-use plato_core::view::common::{locate, locate_by_id, transfer_notifications, overlapping_rectangle};
-use plato_core::view::common::{toggle_input_history_menu, toggle_keyboard_layout_menu};
-use plato_core::view::frontlight::FrontlightWindow;
-use plato_core::view::menu::{Menu, MenuKind};
-use plato_core::view::dictionary::Dictionary as DictionaryApp;
-use plato_core::view::calculator::Calculator;
-use plato_core::view::sketch::Sketch;
-use plato_core::view::touch_events::TouchEvents;
-use plato_core::view::rotation_values::RotationValues;
-use plato_core::document::sys_info_as_html;
-use plato_core::input::{DeviceEvent, PowerSource, ButtonCode, ButtonStatus, VAL_RELEASE, VAL_PRESS};
-use plato_core::input::{raw_events, device_events, usb_events, display_rotate_event, button_scheme_event};
-use plato_core::gesture::{GestureEvent, gesture_events};
-use plato_core::helpers::{load_toml, save_toml};
-use plato_core::settings::{ButtonScheme, Settings, SETTINGS_PATH, RotationLock, IntermKind};
-use plato_core::frontlight::{Frontlight, StandardFrontlight, NaturalFrontlight, PremixedFrontlight};
-use plato_core::lightsensor::{LightSensor, KoboLightSensor};
-use plato_core::battery::{Battery, KoboBattery};
-use plato_core::geom::{Rectangle, DiagDir, Region};
-use plato_core::view::home::Home;
-use plato_core::view::reader::Reader;
-use plato_core::view::dialog::Dialog;
-use plato_core::view::intermission::Intermission;
-use plato_core::view::notification::Notification;
-use plato_core::device::{CURRENT_DEVICE, Orientation, FrontlightKind};
-use plato_core::library::Library;
-use plato_core::font::Fonts;
-use plato_core::rtc::Rtc;
-use plato_core::context::Context;
+use zeno_core::anyhow::{Error, Context as ResultExt, format_err};
+use zeno_core::chrono::Local;
+use zeno_core::framebuffer::{Framebuffer, KoboFramebuffer1, KoboFramebuffer2, UpdateMode};
+use zeno_core::view::{View, Event, EntryId, EntryKind, ViewId, AppCmd, RenderData, RenderQueue, UpdateData};
+use zeno_core::view::{handle_event, process_render_queue, wait_for_all};
+use zeno_core::view::common::{locate, locate_by_id, transfer_notifications, overlapping_rectangle};
+use zeno_core::view::common::{toggle_input_history_menu, toggle_keyboard_layout_menu};
+use zeno_core::view::frontlight::FrontlightWindow;
+use zeno_core::view::menu::{Menu, MenuKind};
+use zeno_core::view::dictionary::Dictionary as DictionaryApp;
+use zeno_core::view::calculator::Calculator;
+use zeno_core::view::sketch::Sketch;
+use zeno_core::view::touch_events::TouchEvents;
+use zeno_core::view::rotation_values::RotationValues;
+use zeno_core::document::sys_info_as_html;
+use zeno_core::input::{DeviceEvent, PowerSource, ButtonCode, ButtonStatus, VAL_RELEASE, VAL_PRESS};
+use zeno_core::input::{raw_events, device_events, usb_events, display_rotate_event, button_scheme_event};
+use zeno_core::gesture::{GestureEvent, gesture_events};
+use zeno_core::helpers::{load_toml, save_toml};
+use zeno_core::settings::{ButtonScheme, Settings, SETTINGS_PATH, RotationLock, IntermKind};
+use zeno_core::frontlight::{Frontlight, StandardFrontlight, NaturalFrontlight, PremixedFrontlight};
+use zeno_core::lightsensor::{LightSensor, KoboLightSensor};
+use zeno_core::battery::{Battery, KoboBattery};
+use zeno_core::geom::{Rectangle, DiagDir, Region};
+use zeno_core::view::home::Home;
+use zeno_core::view::reader::Reader;
+use zeno_core::view::dialog::Dialog;
+use zeno_core::view::intermission::Intermission;
+use zeno_core::view::notification::Notification;
+use zeno_core::device::{CURRENT_DEVICE, Orientation, FrontlightKind};
+use zeno_core::library::Library;
+use zeno_core::font::Fonts;
+use zeno_core::rtc::Rtc;
+use zeno_core::context::Context;
 
-pub const APP_NAME: &str = "Plato";
+pub const APP_NAME: &str = "Zeno";
 const FB_DEVICE: &str = "/dev/fb0";
 const RTC_DEVICE: &str = "/dev/rtc0";
 const TOUCH_INPUTS: [&str; 5] = ["/dev/input/by-path/platform-2-0010-event",
@@ -606,7 +606,7 @@ pub fn run() -> Result<(), Error> {
                 schedule_task(TaskId::Suspend, Event::Suspend,
                               SUSPEND_WAIT_DELAY, &tx, &mut tasks);
                 if context.settings.auto_power_off > 0.0 {
-                    let dur = plato_core::chrono::Duration::seconds((86_400.0 * context.settings.auto_power_off) as i64);
+                    let dur = zeno_core::chrono::Duration::seconds((86_400.0 * context.settings.auto_power_off) as i64);
                     if let Some(fired) = context.rtc.as_ref()
                                                 .and_then(|rtc| rtc.alarm()
                                                                    .map_err(|e| eprintln!("Can't get alarm: {:#}", e))
@@ -758,7 +758,7 @@ pub fn run() -> Result<(), Error> {
             Event::Select(EntryId::About) => {
                 let dialog = Dialog::new(ViewId::AboutDialog,
                                          None,
-                                         format!("Plato {}", env!("CARGO_PKG_VERSION")),
+                                         format!("Zeno {}", env!("CARGO_PKG_VERSION")),
                                          &mut context);
                 rq.add(RenderData::new(dialog.id(), *dialog.rect(), UpdateMode::Gui));
                 view.children_mut().push(Box::new(dialog) as Box<dyn View>);

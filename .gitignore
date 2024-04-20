@@ -16,6 +16,6 @@
 /dictionaries
 /dist
 /bundle
-/plato-*.zip
+/zeno-*.zip
 /thirdparty/*/*
 !/thirdparty/*/*kobo*

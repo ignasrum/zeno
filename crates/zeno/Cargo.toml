@@ -1,18 +1,12 @@
 [package]
 authors = ["Ignas Rumbavicius <rumbavicius@gmail.com>"]
-name = "fetcher"
+name = "zeno"
 version = "0.1.0"
 edition = "2024"
 
 [[bin]]
-name = "article_fetcher"
+name = "zeno"
 path = "src/main.rs"
 
 [dependencies]
 zeno-core = { path = "../core" }
-signal-hook = "0.3.17"
-
-[dependencies.reqwest]
-version = "0.11.24"
-features = ["rustls-tls", "json", "blocking"]
-default-features = false

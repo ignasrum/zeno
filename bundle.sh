@@ -24,7 +24,7 @@ rm KoboRoot.tgz
 mv mnt/onboard/.adds .
 rm -Rf mnt
 
-mv ../dist .adds/plato
+mv ../dist .adds/zeno
 cp ../contrib/NickelMenu/* .adds/nm
 
 mkdir .kobo
@@ -33,7 +33,7 @@ rm -Rf usr
 
 FIRMWARE_VERSION=$(basename "$FIRMWARE_ARCHIVE" .zip)
 FIRMWARE_VERSION=${FIRMWARE_VERSION##*-}
-PLATO_VERSION=$(cargo pkgid -p plato | cut -d '#' -f 2)
+ZENO_VERSION=$(cargo pkgid -p zeno | cut -d '#' -f 2)
 
-zip -r plato-bundle-"$PLATO_VERSION".zip .adds .kobo
+zip -r zeno-bundle-"$ZENO_VERSION".zip .adds .kobo
 rm -Rf .adds .kobo

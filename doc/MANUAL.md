@@ -196,7 +196,7 @@ You can back and forth in history by tapping on the buttons to the left and righ
 
 You can adjust the margin and font size by tapping on the buttons in the bottom bar.
 
-Here is an example of `ivy` code showing its conciseness. The code below appears in one of the Plato screenshots. It defines a binary operator `lab` that takes two inputs `a` and `b` and displays an `a` by `b` grid of Unicode characters.
+Here is an example of `ivy` code showing its conciseness. The code below appears in one of the Zeno screenshots. It defines a binary operator `lab` that takes two inputs `a` and `b` and displays an `a` by `b` grid of Unicode characters.
 
 ```j
 op a lab b = char 9584 + ? a b rho 2

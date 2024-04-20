@@ -1,8 +1,8 @@
 [package]
-authors = ["Bastien Dejean <nihilhill@gmail.com>"]
-name = "plato-core"
-version = "0.9.41"
-edition = "2021"
+authors = ["Ignas Rumbavicius <rumbavicius@gmail.com>"]
+name = "zeno-core"
+version = "0.1.0"
+edition = "2024"
 
 [lib]
 crate-type = ["rlib"]

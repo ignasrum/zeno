@@ -5,8 +5,8 @@ use std::sync::mpsc;
 use std::collections::VecDeque;
 use std::path::Path;
 use std::time::Duration;
-use plato_core::anyhow::{Error, Context as ResultExt};
-use plato_core::chrono::Local;
+use zeno_core::anyhow::{Error, Context as ResultExt};
+use zeno_core::chrono::Local;
 use sdl2::event::Event as SdlEvent;
 use sdl2::keyboard::{Scancode, Keycode, Mod};
 use sdl2::render::{WindowCanvas, BlendMode};
@@ -14,40 +14,40 @@ use sdl2::pixels::{Color as SdlColor, PixelFormatEnum};
 use sdl2::mouse::MouseState;
 use sdl2::rect::Point as SdlPoint;
 use sdl2::rect::Rect as SdlRect;
-use plato_core::framebuffer::{Framebuffer, UpdateMode};
-use plato_core::input::{DeviceEvent, FingerStatus, ButtonCode, ButtonStatus};
-use plato_core::document::sys_info_as_html;
-use plato_core::view::{View, Event, ViewId, EntryId, AppCmd, EntryKind};
-use plato_core::view::{process_render_queue, wait_for_all, handle_event, RenderQueue, RenderData};
-use plato_core::view::home::Home;
-use plato_core::view::reader::Reader;
-use plato_core::view::notification::Notification;
-use plato_core::view::dialog::Dialog;
-use plato_core::view::frontlight::FrontlightWindow;
-use plato_core::view::menu::{Menu, MenuKind};
-use plato_core::view::intermission::Intermission;
-use plato_core::view::dictionary::Dictionary;
-use plato_core::view::calculator::Calculator;
-use plato_core::view::sketch::Sketch;
-use plato_core::view::touch_events::TouchEvents;
-use plato_core::view::rotation_values::RotationValues;
-use plato_core::view::common::{locate, locate_by_id, transfer_notifications, overlapping_rectangle};
-use plato_core::view::common::{toggle_input_history_menu, toggle_keyboard_layout_menu};
-use plato_core::helpers::{load_toml, save_toml};
-use plato_core::settings::{Settings, SETTINGS_PATH, IntermKind};
-use plato_core::geom::{Rectangle, Axis};
-use plato_core::gesture::{GestureEvent, gesture_events};
-use plato_core::device::CURRENT_DEVICE;
-use plato_core::battery::{Battery, FakeBattery};
-use plato_core::frontlight::{Frontlight, LightLevels};
-use plato_core::lightsensor::LightSensor;
-use plato_core::library::Library;
-use plato_core::font::Fonts;
-use plato_core::context::Context;
-use plato_core::pt;
-use plato_core::png;
+use zeno_core::framebuffer::{Framebuffer, UpdateMode};
+use zeno_core::input::{DeviceEvent, FingerStatus, ButtonCode, ButtonStatus};
+use zeno_core::document::sys_info_as_html;
+use zeno_core::view::{View, Event, ViewId, EntryId, AppCmd, EntryKind};
+use zeno_core::view::{process_render_queue, wait_for_all, handle_event, RenderQueue, RenderData};
+use zeno_core::view::home::Home;
+use zeno_core::view::reader::Reader;
+use zeno_core::view::notification::Notification;
+use zeno_core::view::dialog::Dialog;
+use zeno_core::view::frontlight::FrontlightWindow;
+use zeno_core::view::menu::{Menu, MenuKind};
+use zeno_core::view::intermission::Intermission;
+use zeno_core::view::dictionary::Dictionary;
+use zeno_core::view::calculator::Calculator;
+use zeno_core::view::sketch::Sketch;
+use zeno_core::view::touch_events::TouchEvents;
+use zeno_core::view::rotation_values::RotationValues;
+use zeno_core::view::common::{locate, locate_by_id, transfer_notifications, overlapping_rectangle};
+use zeno_core::view::common::{toggle_input_history_menu, toggle_keyboard_layout_menu};
+use zeno_core::helpers::{load_toml, save_toml};
+use zeno_core::settings::{Settings, SETTINGS_PATH, IntermKind};
+use zeno_core::geom::{Rectangle, Axis};
+use zeno_core::gesture::{GestureEvent, gesture_events};
+use zeno_core::device::CURRENT_DEVICE;
+use zeno_core::battery::{Battery, FakeBattery};
+use zeno_core::frontlight::{Frontlight, LightLevels};
+use zeno_core::lightsensor::LightSensor;
+use zeno_core::library::Library;
+use zeno_core::font::Fonts;
+use zeno_core::context::Context;
+use zeno_core::pt;
+use zeno_core::png;
 
-pub const APP_NAME: &str = "Plato";
+pub const APP_NAME: &str = "Zeno";
 const DEFAULT_ROTATION: i8 = 1;
 
 const CLOCK_REFRESH_INTERVAL: Duration = Duration::from_secs(60);
@@ -222,7 +222,7 @@ fn main() -> Result<(), Error> {
     let video_subsystem = sdl_context.video().unwrap();
     let (width, height) = CURRENT_DEVICE.dims;
     let window = video_subsystem
-                 .window("Plato Emulator", width, height)
+                 .window("Zeno Emulator", width, height)
                  .position_centered()
                  .build()
                  .unwrap();
@@ -508,7 +508,7 @@ fn main() -> Result<(), Error> {
                 Event::Select(EntryId::About) => {
                     let dialog = Dialog::new(ViewId::AboutDialog,
                                              None,
-                                             format!("Plato {}", env!("CARGO_PKG_VERSION")),
+                                             format!("Zeno {}", env!("CARGO_PKG_VERSION")),
                                              &mut context);
                     rq.add(RenderData::new(dialog.id(), *dialog.rect(), UpdateMode::Gui));
                     view.children_mut().push(Box::new(dialog) as Box<dyn View>);

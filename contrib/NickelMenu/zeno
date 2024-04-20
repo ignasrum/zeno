@@ -1,0 +1,1 @@
+menu_item  :main  :Zeno      :cmd_spawn  :quiet:/mnt/onboard/.adds/zeno/zeno.sh

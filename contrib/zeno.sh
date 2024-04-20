@@ -3,8 +3,8 @@
 WORKDIR=$(dirname "$0")
 cd "$WORKDIR" || exit 1
 
-PLATO_SET_FRAMEBUFFER_DEPTH=1
-PLATO_CONVERT_DICTIONARIES=1
+ZENO_SET_FRAMEBUFFER_DEPTH=1
+ZENO_CONVERT_DICTIONARIES=1
 
 # shellcheck disable=SC1091
 [ -e config.sh ] && . config.sh
@@ -79,9 +79,9 @@ export LD_LIBRARY_PATH="libs:${LD_LIBRARY_PATH}"
 
 [ -e info.log ] && [ "$(stat -c '%s' info.log)" -gt $((1<<18)) ] && mv info.log archive.log
 
-[ "$PLATO_CONVERT_DICTIONARIES" ] && find -L dictionaries -name '*.ifo' -exec ./convert-dictionary.sh {} \;
+[ "$ZENO_CONVERT_DICTIONARIES" ] && find -L dictionaries -name '*.ifo' -exec ./convert-dictionary.sh {} \;
 
-if [ "$PLATO_SET_FRAMEBUFFER_DEPTH" ] ; then
+if [ "$ZENO_SET_FRAMEBUFFER_DEPTH" ] ; then
 	case "${PRODUCT}:${MODEL_NUMBER}" in
 		condor:*|goldfinch:*|io:*|cadmus:*|europa:*|storm:*|frost:*|nova:*|snow:378|star:379)
 			unset ORIG_BPP
@@ -94,7 +94,7 @@ fi
 
 [ "$ORIG_BPP" ] && ./bin/utils/fbdepth -q -d 8
 
-LIBC_FATAL_STDERR_=1 ./plato >> info.log 2>&1
+LIBC_FATAL_STDERR_=1 ./zeno >> info.log 2>&1
 
 [ "$ORIG_BPP" ] && ./bin/utils/fbdepth -q -d "$ORIG_BPP"
 

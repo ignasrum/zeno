@@ -1,14 +1,14 @@
 [package]
-authors = ["Bastien Dejean <nihilhill@gmail.com>"]
+authors = ["Ignas Rumbavicius <rumbavicius@gmail.com>"]
 name = "importer"
-version = "0.9.41"
-edition = "2021"
+version = "0.1.0"
+edition = "2024"
 
 [[bin]]
-name = "plato-import"
+name = "zeno-import"
 path = "src/main.rs"
 
 [dependencies]
-plato-core = { path = "../core" }
+zeno-core = { path = "../core" }
 getopts = "0.2.21"
 
