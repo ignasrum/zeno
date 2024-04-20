@@ -145,8 +145,8 @@ stretch-tolerance = 1.26
 # Refresh the screen every `regular` page turns when the colors aren't inverted,
 # and every `inverted` page turns when they are. *Zero* means *never*.
 [reader.refresh-rate]
-regular = 8
-inverted = 2
+regular = 1
+inverted = 1
 
 # Override the refresh rates for individual file types.
 # [reader.refresh-rate.by-kind]

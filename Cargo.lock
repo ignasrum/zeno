@@ -309,10 +309,10 @@ checksum = "9ea835d29036a4087793836fa931b08837ad5e957da9e23886b29586fb9b6650"
 
 [[package]]
 name = "emulator"
-version = "0.9.41"
+version = "0.1.0"
 dependencies = [
- "zeno-core",
  "sdl2",
+ "zeno-core",
 ]
 
 [[package]]
@@ -347,11 +347,11 @@ dependencies = [
 
 [[package]]
 name = "fetcher"
-version = "0.9.41"
+version = "0.1.0"
 dependencies = [
- "zeno-core",
  "reqwest",
  "signal-hook",
+ "zeno-core",
 ]
 
 [[package]]
@@ -632,7 +632,7 @@ dependencies = [
 
 [[package]]
 name = "importer"
-version = "0.9.41"
+version = "0.1.0"
 dependencies = [
  "getopts",
  "zeno-core",
@@ -868,50 +868,6 @@ name = "pkg-config"
 version = "0.3.30"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d231b230927b5e4ad203db57bbcbee2802f6bce620b1e4a9024a07d94e2907ec"
-
-[[package]]
-name = "zeno"
-version = "0.9.41"
-dependencies = [
- "zeno-core",
-]
-
-[[package]]
-name = "zeno-core"
-version = "0.9.41"
-dependencies = [
- "anyhow",
- "bitflags 2.4.2",
- "byteorder",
- "chrono",
- "downcast-rs",
- "entities",
- "flate2",
- "fxhash",
- "globset",
- "indexmap",
- "kl-hyphenate",
- "lazy_static",
- "levenshtein",
- "libc",
- "nix",
- "paragraph-breaker",
- "percent-encoding",
- "png",
- "rand_core",
- "rand_xoshiro",
- "regex",
- "septem",
- "serde",
- "serde_json",
- "thiserror",
- "titlecase",
- "toml",
- "unicode-normalization",
- "walkdir",
- "xi-unicode",
- "zip",
-]
 
 [[package]]
 name = "png"
@@ -1844,6 +1800,50 @@ name = "xi-unicode"
 version = "0.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "a67300977d3dc3f8034dae89778f502b6ba20b269527b3223ba59c0cf393bb8a"
+
+[[package]]
+name = "zeno"
+version = "0.1.0"
+dependencies = [
+ "zeno-core",
+]
+
+[[package]]
+name = "zeno-core"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "bitflags 2.4.2",
+ "byteorder",
+ "chrono",
+ "downcast-rs",
+ "entities",
+ "flate2",
+ "fxhash",
+ "globset",
+ "indexmap",
+ "kl-hyphenate",
+ "lazy_static",
+ "levenshtein",
+ "libc",
+ "nix",
+ "paragraph-breaker",
+ "percent-encoding",
+ "png",
+ "rand_core",
+ "rand_xoshiro",
+ "regex",
+ "septem",
+ "serde",
+ "serde_json",
+ "thiserror",
+ "titlecase",
+ "toml",
+ "unicode-normalization",
+ "walkdir",
+ "xi-unicode",
+ "zip",
+]
 
 [[package]]
 name = "zip"

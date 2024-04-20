@@ -2,7 +2,7 @@
 authors = ["Ignas Rumbavicius <rumbavicius@gmail.com>"]
 name = "fetcher"
 version = "0.1.0"
-edition = "2024"
+edition = "2021"
 
 [[bin]]
 name = "article_fetcher"
