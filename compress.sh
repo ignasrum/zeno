@@ -1,3 +1,3 @@
 #! /bin/sh
 
-zip zeno.zip dist/*
+zip -r zeno.zip dist/*
