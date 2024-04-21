@@ -74,7 +74,7 @@ impl View for Intermission {
 
                 let font = font_from_style(fonts, &DISPLAY_STYLE, dpi);
                 let padding = font.em() as i32;
-                let max_width = self.rect.width() as i32 - 3 * padding;
+                let max_width = self.rect.width() as i32 - 1 * padding;
                 let mut plan = font.plan(text, None, None);
 
                 if plan.width > max_width {
@@ -91,7 +91,7 @@ impl View for Intermission {
 
                 font.render(fb, scheme[1], &plan, pt!(dx, dy));
 
-                let mut doc = open("icons/icon.svg").unwrap();
+                let mut doc = open("icons/pause.svg").unwrap();
                 let (width, height) = doc.dims(0).unwrap();
                 let scale = (plan.width as f32 / width.max(height) as f32) / 4.0;
                 let (pixmap, _) = doc.pixmap(Location::Exact(0), scale).unwrap();
