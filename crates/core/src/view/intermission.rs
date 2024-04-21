@@ -91,7 +91,7 @@ impl View for Intermission {
 
                 font.render(fb, scheme[1], &plan, pt!(dx, dy));
 
-                let mut doc = open("icons/dodecahedron.svg").unwrap();
+                let mut doc = open("icons/pause.svg").unwrap();
                 let (width, height) = doc.dims(0).unwrap();
                 let scale = (plan.width as f32 / width.max(height) as f32) / 4.0;
                 let (pixmap, _) = doc.pixmap(Location::Exact(0), scale).unwrap();
