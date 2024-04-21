@@ -2,7 +2,7 @@
 
 declare -A urls=(
 	# Compression
-	["zlib"]="https://www.zlib.net/zlib-1.3.tar.gz"
+	["zlib"]="https://www.zlib.net/current/zlib.tar.gz"
 	["bzip2"]="https://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz"
 	# Images
 	["libpng"]="https://download.sourceforge.net/libpng/libpng-1.6.40.tar.gz"
