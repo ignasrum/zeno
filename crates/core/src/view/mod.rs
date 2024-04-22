@@ -39,7 +39,6 @@ pub mod home;
 pub mod reader;
 pub mod dictionary;
 pub mod calculator;
-pub mod sketch;
 pub mod touch_events;
 pub mod rotation_values;
 
@@ -367,7 +366,7 @@ pub enum Event {
 
 #[derive(Debug, Clone, Eq, PartialEq)]
 pub enum AppCmd {
-    Sketch,
+    Terminal,
     Calculator,
     Dictionary {
         query: String,
@@ -407,7 +406,6 @@ pub enum ViewId {
     PresetMenu,
     MarginCropperMenu,
     SearchMenu,
-    SketchMenu,
     RenameDocument,
     RenameDocumentInput,
     GoToPage,

@@ -121,7 +121,6 @@ pub struct Settings {
     pub reader: ReaderSettings,
     pub import: ImportSettings,
     pub dictionary: DictionarySettings,
-    pub sketch: SketchSettings,
     pub calculator: CalculatorSettings,
     pub battery: BatterySettings,
     pub frontlight_levels: LightLevels,
@@ -195,14 +194,6 @@ impl Default for DictionarySettings {
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(default, rename_all = "kebab-case")]
-pub struct SketchSettings {
-    pub save_path: PathBuf,
-    pub notify_success: bool,
-    pub pen: Pen,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize)]
-#[serde(default, rename_all = "kebab-case")]
 pub struct CalculatorSettings {
     pub font_size: f32,
     pub margin_width: i32,
@@ -229,16 +220,6 @@ impl Default for Pen {
             amplitude: 4.0,
             min_speed: 0.0,
             max_speed: mm_to_px(254.0, CURRENT_DEVICE.dpi),
-        }
-    }
-}
-
-impl Default for SketchSettings {
-    fn default() -> Self {
-        SketchSettings {
-            save_path: PathBuf::from("Sketches"),
-            notify_success: true,
-            pen: Pen::default(),
         }
     }
 }
@@ -546,7 +527,6 @@ impl Default for Settings {
             reader: ReaderSettings::default(),
             import: ImportSettings::default(),
             dictionary: DictionarySettings::default(),
-            sketch: SketchSettings::default(),
             calculator: CalculatorSettings::default(),
             battery: BatterySettings::default(),
             frontlight_levels: LightLevels::default(),

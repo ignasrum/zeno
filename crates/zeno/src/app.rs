@@ -17,7 +17,6 @@ use zeno_core::view::frontlight::FrontlightWindow;
 use zeno_core::view::menu::{Menu, MenuKind};
 use zeno_core::view::dictionary::Dictionary as DictionaryApp;
 use zeno_core::view::calculator::Calculator;
-use zeno_core::view::sketch::Sketch;
 use zeno_core::view::touch_events::TouchEvents;
 use zeno_core::view::rotation_values::RotationValues;
 use zeno_core::document::sys_info_as_html;
@@ -794,10 +793,7 @@ pub fn run() -> Result<(), Error> {
                 view.children_mut().retain(|child| !child.is::<Menu>());
                 let monochrome = context.fb.monochrome();
                 let mut next_view: Box<dyn View> = match app_cmd {
-                    AppCmd::Sketch => {
-                        context.fb.set_monochrome(true);
-                        Box::new(Sketch::new(context.fb.rect(), &mut rq, &mut context))
-                    },
+                    AppCmd::Terminal => Box::new(Calculator::new(context.fb.rect(), &tx, &mut rq, &mut context)?),
                     AppCmd::Calculator => Box::new(Calculator::new(context.fb.rect(), &tx, &mut rq, &mut context)?),
                     AppCmd::Dictionary { ref query, ref language } => Box::new(DictionaryApp::new(context.fb.rect(), query,
                                                                                                   language, &tx, &mut rq, &mut context)),

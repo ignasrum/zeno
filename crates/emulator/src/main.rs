@@ -28,7 +28,6 @@ use zeno_core::view::menu::{Menu, MenuKind};
 use zeno_core::view::intermission::Intermission;
 use zeno_core::view::dictionary::Dictionary;
 use zeno_core::view::calculator::Calculator;
-use zeno_core::view::sketch::Sketch;
 use zeno_core::view::touch_events::TouchEvents;
 use zeno_core::view::rotation_values::RotationValues;
 use zeno_core::view::common::{locate, locate_by_id, transfer_notifications, overlapping_rectangle};
@@ -424,8 +423,8 @@ fn main() -> Result<(), Error> {
                 Event::Select(EntryId::Launch(app_cmd)) => {
                     view.children_mut().retain(|child| !child.is::<Menu>());
                     let mut next_view: Box<dyn View> = match app_cmd {
-                        AppCmd::Sketch => {
-                            Box::new(Sketch::new(context.fb.rect(), &mut rq, &mut context))
+                        AppCmd::Terminal => {
+                            Box::new(Calculator::new(context.fb.rect(), &tx, &mut rq, &mut context)?)
                         },
                         AppCmd::Calculator => {
                             Box::new(Calculator::new(context.fb.rect(), &tx, &mut rq, &mut context)?)
