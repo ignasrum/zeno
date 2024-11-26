@@ -47,6 +47,7 @@ use crate::unit::scale_by_dpi;
 use crate::color::BLACK;
 use crate::font::Fonts;
 use crate::context::Context;
+use reqwest::blocking::Client;
 
 pub const TRASH_DIRNAME: &str = ".trash";
 
@@ -960,6 +961,15 @@ impl Home {
     }
 
     fn toggle_library_menu(&mut self, rect: Rectangle, enable: Option<bool>, rq: &mut RenderQueue, context: &mut Context) {
+        let client = Client::new();
+        let query = json!({"id": 300});
+        let url = format!("{}/testing", "http://localhost:8080");
+        let response = client.post(&url)
+                             .json(&query)
+                             .send();
+        let response = response.unwrap();
+        println!("{}", response.status());
+
         if let Some(index) = locate_by_id(self, ViewId::LibraryMenu) {
             if let Some(true) = enable {
                 return;
@@ -981,6 +991,7 @@ impl Home {
 
             let database = if library_settings.mode == LibraryMode::Database {
                 vec![EntryKind::Command("Import".to_string(), EntryId::Import),
+                     EntryKind::Command("Sync".to_string(), EntryId::Flush),
                      EntryKind::Command("Flush".to_string(), EntryId::Flush)]
             } else {
                 Vec::new()

@@ -1833,6 +1833,7 @@ dependencies = [
  "rand_core",
  "rand_xoshiro",
  "regex",
+ "reqwest",
  "septem",
  "serde",
  "serde_json",
